@@ -139,12 +139,12 @@ internal object DeepAIListener : SimpleListenerHost() {
         val content = event.message.contentToString()
 
         when {
-            content.startsWith(OpenAIConfig.chat) && (OpenAIConfig.permission.not())
-                    || event.toCommandSender().hasPermission(chat)
+            content.startsWith(OpenAIConfig.chat) && (OpenAIConfig.permission.not()
+                    || event.toCommandSender().hasPermission(chat))
             -> chat(event)
 
-            content.startsWith(OpenAIConfig.reload) && (OpenAIConfig.permission.not())
-                    || event.toCommandSender().hasPermission(reload)
+            content.startsWith(OpenAIConfig.reload) && (OpenAIConfig.permission.not()
+                    || event.toCommandSender().hasPermission(reload))
             -> with(DeepAIPlugin) {
                 config.forEach { config ->
                     config.reload()

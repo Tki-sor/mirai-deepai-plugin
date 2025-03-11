@@ -16,7 +16,7 @@ public object Prompts : AutoSavePluginData(saveName = "prompts") {
 
     private var logger = MiraiLogger.Factory.create(this::class)
 
-    private const val default: String = "你是一只猫娘"
+    private const val default: String = ""
 
     private val cache: MutableMap<String, String> = WeakHashMap()
 

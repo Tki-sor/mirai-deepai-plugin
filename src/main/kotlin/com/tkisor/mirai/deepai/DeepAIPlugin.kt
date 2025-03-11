@@ -1,5 +1,6 @@
 package com.tkisor.mirai.deepai
 
+import com.tkisor.mirai.deepai.config.OpenAIConfig
 import kotlinx.coroutines.cancel
 import net.mamoe.mirai.console.data.PluginConfig
 import net.mamoe.mirai.console.data.PluginData
@@ -9,6 +10,8 @@ import net.mamoe.mirai.event.ListenerHost
 import net.mamoe.mirai.event.SimpleListenerHost
 import net.mamoe.mirai.event.globalEventChannel
 import net.mamoe.mirai.event.registerTo
+import net.mamoe.mirai.utils.info
+import net.mamoe.mirai.utils.warning
 
 public object DeepAIPlugin: KotlinPlugin(
     JvmPluginDescription(
@@ -34,6 +37,18 @@ public object DeepAIPlugin: KotlinPlugin(
 
 
         for (listener in listeners) (listener as SimpleListenerHost).registerTo(globalEventChannel())
+
+        if (OpenAIConfig.permission) {
+            logger.info { "权限检查已开启" }
+            DeepAIListener.bind_group
+            DeepAIListener.chat
+            DeepAIListener.reload
+        }
+
+        if (OpenAIConfig.chatByAt) {
+            logger.warning { "@Bot 触发聊天已开启, 手机端引用消息会自带@，请注意不要误触" }
+        }
+
     }
 
     override fun onDisable() {

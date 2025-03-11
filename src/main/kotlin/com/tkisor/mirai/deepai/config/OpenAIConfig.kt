@@ -62,6 +62,18 @@ internal object OpenAIConfig : ReadOnlyPluginConfig(saveName = "openai") {
     @ValueDescription("聊天服务个数限制")
     val limit: Int by value(10)
 
+    @ValueName("has_permission")
+    @ValueDescription("权限检查")
+    val permission: Boolean by value(false)
+
+    @ValueName("bind_set_prefix")
+    @ValueDescription("绑定设置触发前缀")
+    val bind: String by value("bind")
+
+    @ValueName("bind_model_set_prefix")
+    @ValueDescription("绑定模型设置触发前缀")
+    val bind_model: String by value("bind_model")
+
     fun proxy(): Proxy {
         if (proxy.isEmpty()) {
             return Proxy.NO_PROXY
